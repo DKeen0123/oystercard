@@ -35,9 +35,10 @@ class Oystercard
       @journey_history << { entry: nil, exit: @current_journey.exit_station}
       deduct(@current_journey.fare)
     else
+      @current_journey.completed(exit_station)
+      @journey_history.last[:exit] = @current_journey.exit_station
       deduct(@current_journey.fare)
       @current_journey.ending(exit_station)
-      @journey_history.last[:exit] = @current_journey.exit_station
     end
 
   end
